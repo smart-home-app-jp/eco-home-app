@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/arduino_home.dart';
+
+import '../domain/models/arduino_home.dart';
 import 'info_row.dart';
 import 'section_card.dart';
 
@@ -46,10 +47,7 @@ class HeatingStatusCard extends StatelessWidget {
               value: '${home.timeToHeatingOffStr} хв',
             ),
           if (home.stateRelayByHand)
-            const InfoRow(
-              label: 'Реле перемкнуто вручну',
-              value: 'так',
-            ),
+            const InfoRow(label: 'Реле перемкнуто вручну', value: 'так'),
         ],
       ),
     );

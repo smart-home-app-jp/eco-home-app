@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
-import '../models/arduino_home.dart';
+import '../../domain/models/arduino_home.dart';
 
 /// Headless simulation of the Arduino heating-control sketch (arduino.txt).
 ///
@@ -40,8 +40,9 @@ class ArduinoSimulationEngine extends ValueNotifier<ArduinoHome> {
   final List<String> _serialLog = <String>[];
 
   /// Immutable copy of the Serial log, exposed for the console UI.
-  final ValueNotifier<List<String>> serialLog =
-      ValueNotifier<List<String>>(const <String>[]);
+  final ValueNotifier<List<String>> serialLog = ValueNotifier<List<String>>(
+    const <String>[],
+  );
 
   int get _millis => _stopwatch.elapsedMilliseconds;
 
@@ -72,11 +73,7 @@ class ArduinoSimulationEngine extends ValueNotifier<ArduinoHome> {
       }
 
       _fetchTemp();
-      _update(
-        second: second,
-        minute: minute,
-        hour: hour,
-      );
+      _update(second: second, minute: minute, hour: hour);
 
       _checkTemp();
       _checkAlarm();
@@ -91,8 +88,8 @@ class ArduinoSimulationEngine extends ValueNotifier<ArduinoHome> {
   /// Heating (relay LOW) biases the walk up, cooling biases it down.
   void _fetchTemp() {
     final bool heating = !_home.relayHigh;
-    final double drift = (heating ? 0.12 : -0.08) +
-        (_random.nextDouble() - 0.5) * 0.2;
+    final double drift =
+        (heating ? 0.12 : -0.08) + (_random.nextDouble() - 0.5) * 0.2;
     final double next = (_home.temperatureC + drift).clamp(5.0, 45.0);
     _update(temperatureC: double.parse(next.toStringAsFixed(1)));
   }
@@ -301,6 +298,24 @@ class ArduinoSimulationEngine extends ValueNotifier<ArduinoHome> {
             ? 'Time to heating ON - ${_home.timeToHeatingOnStr}'
             : 'Time to heating OFF - ${_home.timeToHeatingOffStr}',
       );
+    } else if (inData.startsWith('timer-')) {
+      final String body = inData.substring(6);
+      final List<String> parts = body.split(':');
+      if (parts.length == 2) {
+        final int? hour = int.tryParse(parts[0]);
+        final int? minute = int.tryParse(parts[1]);
+        if (hour != null &&
+            minute != null &&
+            hour >= 0 &&
+            hour <= 23 &&
+            minute >= 0 &&
+            minute <= 59) {
+          _update(timerHour: hour, timerMinute: minute);
+          print('Done');
+          return out;
+        }
+      }
+      print('Error: timer time must use HH:MM');
     } else if (inData == 'timer ?') {
       print(
         _home.isTimerOn
