@@ -1,0 +1,13 @@
+# Flutter/Dart розробка
+.dart_tool/
+.packages
+build/
+
+# Допоміжні файли середовища розробки
+.idea/
+.vscode/
+*.iml
+*.DS_Store
+
+# Системні файли метаданих Flutter (якщо потрібно повністю ігнорувати)
+.metadata

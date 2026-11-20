@@ -17,7 +17,10 @@ coverage/
 # IDE
 # =========================
 
-.idea/
+.idea/*
+!.idea/vcs.xml
+!.idea/runConfigurations/
+!.idea/runConfigurations/**
 *.iml
 
 # VS Code
@@ -39,6 +42,14 @@ android/app/release/
 # Generated Android files
 android/.cxx/
 android/captures/
+apps/mobile/android/.gradle/
+apps/mobile/android/local.properties
+apps/mobile/android/.idea/
+apps/mobile/android/app/debug/
+apps/mobile/android/app/profile/
+apps/mobile/android/app/release/
+apps/mobile/android/.cxx/
+apps/mobile/android/captures/
 
 # =========================
 # iOS
