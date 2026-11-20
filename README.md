@@ -1,72 +1,79 @@
 # Heating Control
 
-A simple educational Flutter application for controlling home heating systems. This project demonstrates basic Dart and Flutter concepts including variables, types, functions, classes, widgets, and state management.
+A Flutter app for an educational eco-home heating dashboard and Arduino heating simulation.
 
-## Features
+The Flutter project is located in the [`app`](app) directory. Run all Flutter commands from that directory.
 
-- **Boiler Control**: Toggle boiler on/off for each room
-- **Floor Heating Control**: Manage floor heating in kitchen and bathroom
-- **Temperature Monitoring**: Track air and water temperatures
-- **Auto Mode**: Automatic boiler control based on temperature thresholds
-- **Real-time Statistics**: View overall home heating statistics
+## Functionality
+
+- **Boiler Control**: Turning the boiler on/off for each room
+- **Underfloor Heating Control**: Managing underfloor heating in the kitchen and bathroom
+- **Temperature Monitoring**: Tracking air and water temperatures
+- **Automatic Mode**: Automatic boiler control based on temperature threshold values
+- **Real-time Statistics**: Viewing overall home heating statistics
 
 ## Project Structure
 
 ```
-lib/
-├── main.dart              # App entry point and main screen
-├── models/
-│   └── room.dart          # Room data model
-├── widgets/
-│   ├── room_card.dart     # Individual room card widget
-│   ├── overview_card.dart # Home overview widget
-│   ├── statistics_card.dart # Statistics display widget
-│   ├── device_row.dart    # Device control row widget
-│   ├── stat_row.dart      # Statistics row widget
-│   └── status_colors.dart # Status color utility
-└── screens/              # Prepared for future screens
+app/
+├── lib/
+│   ├── app/                 # Application setup and theme
+│   ├── data/simulation/     # Arduino simulation engine
+│   ├── domain/models/       # Domain models
+│   ├── features/            # Dashboard and feature screens
+│   └── widgets/             # Reusable UI widgets
+├── test/                    # Widget and simulation tests
+├── android/                 # Android runner
+├── ios/                     # iOS runner
+├── web/                     # Web runner
+├── linux/                   # Linux runner
+├── macos/                   # macOS runner
+└── windows/                 # Windows runner
 ```
 
 ## Getting Started
 
-### Prerequisites
+### Requirements
 
 - Flutter SDK (3.0 or higher)
 - Dart SDK
-- Android Studio / VS Code with Flutter extension
+- Android Studio / VS Code with the Flutter extension
 
 ### Installation
 
 1. Clone the repository
-2. Navigate to the project directory
+2. Navigate to the Flutter project:
+   ```bash
+   cd app
+   ```
 3. Install dependencies:
-   ```bash
-   flutter pub get
-   ```
-4. Run the app:
-   ```bash
-   flutter run
-   ```
+```bash
+flutter pub get
+```
+4. Run the application:
+```bash
+flutter run
+```
 
 ## Usage
 
-- **Toggle Boiler**: Use the switch to turn boiler on/off for each room
-- **Toggle Floor Heating**: Control floor heating independently
-- **Auto Boiler**: Click "Auto Boiler" to automatically control boilers based on temperature (threshold: 21°C)
+- **Boiler Switching**: Use the toggle switch to Turning the boiler on/off for each room
+- **Underfloor Heating Control**: Manage underfloor heating independently
+- **Automatic Boiler**: Press "Auto Boiler" for automatic boiler control based on temperature (threshold: 21°C)
 - **View Statistics**: Check the bottom card for overall home statistics
 
-## Educational Purpose
+## Educational Goal
 
-This project is designed for learning Flutter and Dart. It demonstrates:
+This project was created for learning Flutter and Dart. It demonstrates:
 - Variables and data types
 - Control flow (if statements, for loops)
 - Functions and methods
 - Classes and objects
 - Getters and computed properties
-- State management with setState
+- State management using `setState`
 - Widget composition
 - Material Design UI components
 
 ## License
 
-This is an educational project. Feel free to use it for learning purposes.
+This is an educational project. Feel free to use it for educational purposes.
